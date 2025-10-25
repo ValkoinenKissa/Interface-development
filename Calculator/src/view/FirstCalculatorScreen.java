@@ -33,7 +33,7 @@ public class FirstCalculatorScreen extends JFrame {
 	 */
 	public static void main(String[] args) {
 		try {
-			//Look n feel para que el jPanel adopte el estilo de windows
+			// Look n feel para que el jPanel adopte el estilo de windows
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -59,16 +59,20 @@ public class FirstCalculatorScreen extends JFrame {
 		setMinimumSize(new Dimension(400, 500));
 		setTitle("Calculator");
 		setForeground(new Color(243, 243, 243));
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(FirstCalculatorScreen.class.getResource("/img/calculator_icon.png")));
+		// Metodo de toolkit para sacar la resolucion actual de la pantalla
+		Toolkit myScreen = Toolkit.getDefaultToolkit();
+		myScreen.getScreenSize();
+		setIconImage(myScreen.getImage(FirstCalculatorScreen.class.getResource("/img/calculator_icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		/*
-		 * int x, int y, int width, int height
-		 * 
-		 * Moves and resizes this component. The new location of the top-left corner is
-		 * specified by x and y, and the new size is specified by width and height.
-		 */
-		setBounds(100, 100, 361, 564);
+
+		// Obtener dimension pantalla
+		Dimension screen = myScreen.getScreenSize();
+		// Quiero que el tamaño de la ventana sea 5 veces menor que la resolucion del
+		// monitor
+		setSize(screen.width / 5, screen.height / 5);
+		setLocationRelativeTo(null); // Este metodo tambien pone en el centro la pantalla, si necesidad de invocar
+										// mas objetos
+
 		mainContentPane = new JPanel();
 		mainContentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mainContentPane);
